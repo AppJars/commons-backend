@@ -57,12 +57,17 @@ public class ServiceException extends BaseException {
 		super(cause, messageKey, messageKeyValues);
 	}
 
-	public <T extends ErrorDescription> ServiceException(Throwable cause, T error) {
+	public ServiceException(Throwable cause, ErrorDescription error) {
 		super(cause, error);
 	}
 
 	public ServiceException(Throwable cause) {
 		super(cause);
+	}
+	
+	@Override
+	protected BaseException newInstance(ErrorDescription error) {
+		return new ServiceException(null, error);
 	}
 
 }
